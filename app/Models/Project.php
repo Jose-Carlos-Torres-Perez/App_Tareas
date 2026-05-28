@@ -12,7 +12,10 @@ class Project extends Model
 {
     use HasFactory;
     use SoftDeletes;
-
+ protected $fillable = [
+        'title',
+        
+    ];
    
 
     public function user(): BelongsTo
