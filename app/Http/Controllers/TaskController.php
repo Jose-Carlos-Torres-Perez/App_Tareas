@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use App\Models\Project;
 
 class TaskController extends Controller
 {
@@ -26,10 +27,22 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+   public function store(Request $request, Project $project)
     {
-        //
+        // 🌟 SI NO ESTÁ ESTO, EL TEST FALLA:
+        $request->validate([
+            'title' => 'required|string|max:255',
+        ]);
+
+        // El resto de tu código para crear la tarea...
+        $project->tasks()->create([
+            'title' => $request->title,
+            'status' => 'pending',
+        ]);
+
+        return redirect()->route('projects.show', $project);
     }
+
 
     /**
      * Display the specified resource.
