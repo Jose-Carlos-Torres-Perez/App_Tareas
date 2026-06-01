@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class TaskFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     *
      *
      * @return array<string, mixed>
      */
@@ -20,8 +20,8 @@ class TaskFactory extends Factory
     {
         
            return [
-            'title' => fake()->sentence(),
-            'status'=>fake()->sentence(),
+            'title' => fake()->sentence(4),
+            'status'=>fake()->randomElement(['pendiente','en proceso','completado']),
             'project_id' => Project::factory(),
         ];
         

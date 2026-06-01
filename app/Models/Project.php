@@ -21,12 +21,13 @@ class Project extends Model
 
     protected $fillable = [
         'title',
-        'user_id'
+        'user_id',
+        'created_at'
     ];
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class); // Asegúrate de que 'belongsTo' esté en minúscula
+        return $this->belongsTo(User::class); 
     }
 
     public function tasks(): HasMany

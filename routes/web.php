@@ -23,12 +23,15 @@ Route::middleware('auth')->group(function () {
 
     
     Route::get('/project', [ProjectController::class, 'index'])->name('project.index');
-    Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
-
+    Route::get('/project/create', [ProjectController::class, 'create'])->name('project.create');
+    Route::get('/project/{project}/edit', [ProjectController::class, 'edit'])->name('project.edit');
+    Route::post('/project', [ProjectController::class,'store'])->name('project.store');
+    Route::put('/project/{project}', [ProjectController::class,'update'])->name('project.update');
+    Route::delete('/project/{project}', [ProjectController::class,'destroy'])->name('project.destroy');
    
+    Route::get('project/{project}/task', [TaskController::class, 'index'])->name('task.index');
     
-    Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show');
-    Route::post('/projects/{project}/tasks', [TaskController::class, 'store'])->name('tasks.store');
+    
 });
 
 require __DIR__.'/auth.php';

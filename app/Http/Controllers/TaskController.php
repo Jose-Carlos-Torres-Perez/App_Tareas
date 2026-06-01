@@ -5,15 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Project $project)
     {
-        //
+         
+
+         $tasks= $project->tasks;
+
+    return view('task.index', compact('tasks','project'));
     }
 
     /**
@@ -29,12 +34,11 @@ class TaskController extends Controller
      */
    public function store(Request $request, Project $project)
     {
-        // 🌟 SI NO ESTÁ ESTO, EL TEST FALLA:
+        
         $request->validate([
             'title' => 'required|string|max:255',
         ]);
 
-        // El resto de tu código para crear la tarea...
         $project->tasks()->create([
             'title' => $request->title,
             'status' => 'pending',
@@ -45,7 +49,7 @@ class TaskController extends Controller
 
 
     /**
-     * Display the specified resource.
+     * 
      */
     public function show(Task $task)
     {
